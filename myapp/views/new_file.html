@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="javascripts/axios.min.js"></script>
+		<script type="text/javascript" src="javascripts/vue.min.js"></script>
+		<script src="javascripts/pagination.js"></script>
+	</head>
+	<body>
+		
+        <div class="am-u-md-8 am-u-sm-12" id="islist">
+				<article  class="am-g blog-entry-article mee" v-for="n in mcs.length">
+					<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+						<img v-if="mcs[n-1].imgL1==null" src='images/21.jpg' class="am-u-sm-12 shit" />
+						<img v-else-if="mcs[n-1].imgL1==''" src='images/21.jpg' class="am-u-sm-12 shit" />
+						<img v-else-if="mcs[n-1].imgL1==undefined" src='images/21.jpg' class="am-u-sm-12 shit" />
+						<img v-else v-bind:src='mcs[n-1].imgL1' alt="" class="am-u-sm-12 shit">
+					</div>
+					<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+						<span>
+							<a class="blog-color" v-if="mcs[n-1].username==null">游客&nbsp;</a>
+							<a class="blog-color" v-else-if="mcs[n-1].username==''">游客&nbsp;</a>
+							<a class="blog-color" v-else-if="mcs[n-1].username==undefined">游客&nbsp;</a>
+							<a class="blog-color" v-else>{{mcs[n-1].username}}&nbsp;</a>
+						</span>
+						<h1 class="mgt" v-bind:id='mcs[n-1].id'><a>{{(mcs[n-1].bt).substring(0, 10) + "..."}}</a></h1>
+						<p class="mybt1" style="cursor:pointer;word-break:break-word;" v-bind:id='mcs[n-1].id'>{{(mcs[n-1].file).substring(0, 78) + "..."}}</p>
+						<p>
+							<a href="" class="blog-continue">continue reading</a>
+						</p>
+					</div>
+				</article>
+			</div>
+       <p>  
+    <input type="button" onclick="getmc(2)" value="更新页面" />  
+</p>  
+		<script type="application/ecmascript">
+		
+			
+
+    vm = new Vue({  
+        el:'#islist',  
+        data:{  
+            mcs : []  
+        }  
+    });  
+    getmc(1);  
+
+  
+function getmc(h){  
+	var dataE1 = {
+					"od": h
+				};
+    axios({
+					method: 'post',
+					url: '/users/allwen',
+					data: dataE1
+				}).then(function(response) {
+					var dataTm = JSON.parse(unescape(response.data)).allwen;
+					vm.mcs = dataTm
+					
+					console.log(vm)
+				});
+          
+    
+}  
+		</script>
+	</body>
+</html>

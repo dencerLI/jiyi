@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
+		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="stylesheets/login.css" />
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="stylesheets/assets/js/amazeui.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+		<style>
+			.header {
+				text-align: center;
+			}
+			
+			.header h1 {
+				font-size: 200%;
+				color: #333;
+				margin-top: 30px;
+			}
+			
+			.header p {
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<!--<div class="am-g">
+				<h1>欢迎来到记忆的家</h1>
+				<p>这里是梦的储存，延续<br/>当你的心无处落脚的时候，或许这里可以让你小憩片刻</p>
+			</div>
+			<hr />-->
+		</div>
+		<div class="am-g">
+			<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+				<h3>注册</h3>
+				<hr>
+				<!--<div class="am-btn-group">
+      <a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i> Google+</a>
+      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i> stackOverflow</a>
+    </div>-->
+				<!--<br>
+    <br>-->
+
+				<div class="am-g am-container">
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<input type="text" class="am-form-field" placeholder="请输入邮箱注册" id="name">
+							<span class="am-input-group-btn">
+                              <button class="am-btn am-btn-default" type="button" id="faso">发送验证码到邮箱</button>
+                           </span>
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-envira"></i></span>
+							<input type="text" class="am-form-field" placeholder="请输入验证码" id="yzm">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+							<input type="password" class="am-form-field" placeholder="密码" id="pass">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+							<input type="password" class="am-form-field" placeholder="确认密码" id="repass">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-envira"></i></span>
+							<input type="text" class="am-form-field" placeholder="年龄" id="age">
+						</div>
+					</div>
+
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<button type="button" class="am-btn am-btn-primary am-btn-block" id="register">注册</button>
+						<a href="/" style="float: right; margin-top: 10px; margin-right: 20px;">返回首页</a>
+					</div>
+				</div>
+                
+				<hr>
+				<p>© 2014 www.mefat.club developer .</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var gbq=0;
+			$("#faso").click(function(){
+				if(gbq==0){
+				var isname = $("#name").val();
+//				var mm=/^\d+@qq\.com$/
+                var mm=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+				if(!mm.test(isname)) {
+					alert("仅支持邮箱注册哦");return false;
+				}
+				var data = {
+					"email": isname
+				}
+				$.ajax({
+					url: '/users/faso',
+					type: 'post',
+					data: data,
+					success: function(data) {
+						$("#faso").text("发送成功！(30)秒后可再次发送");
+						gbq=1;
+						var tm=29;
+						var gh=setInterval(function(){
+							$("#faso").text("发送成功！("+tm+")秒后可再次发送");
+							if(tm==0){
+								$("#faso").text("发送验证码到邮箱");
+								gbq=0;
+								clearInterval(gh);
+							}
+							tm--;
+						},1000)
+						//console.log()
+//						$(".yzm").text(data)
+//						if(data.length==0) {
+//							alert("你输入的邮箱不正确")
+//							return false;
+//						}
+					},
+					error: function(data) {
+
+					}
+				});
+				}
+			})
+			function checkNumber(theObj) {
+				var reg = /^[0-9]+.?[0-9]*$/;
+				if(reg.test(theObj)) {
+					return true;
+				}
+				return false;
+			}
+			$('#register').click(function() {
+				var isname = $("#name").val();
+				var ispass = $("#pass").val();
+				var isrepass = $("#repass").val();
+				var isage = $("#age").val();
+				var yzm=$("#yzm").val();
+				
+				//发送验证
+				
+
+				if(isname == null || isname == '' || isname == undefined) {
+					alert("请使用邮箱注册");
+					return false;
+				}
+				if(yzm.length!=6) {
+					alert("请输入6位数验证码");
+					return false;
+				}
+				if(ispass.length < 6 || ispass.length > 18) {
+					alert("密码大于等于6位并小于18位");
+					return false;
+				}
+				var reg = /^[0-9a-zA-Z]+$/;
+				if(!reg.test(ispass)) {
+					alert("密码只能由数字和字母组成");
+					return false;
+				}
+				if(isrepass != ispass) {
+					alert("两次输入密码不一致");
+					return false;
+				}
+				if(!checkNumber(isage)) {
+					alert("请输入正确年龄");
+					return false;
+				}
+				var data = {
+					'name': isname,
+					'pass': ispass,
+					'age': isage,
+					'myyzm':yzm
+				}
+
+				$.ajax({
+					url: '/users/zhuce',
+					type: 'post',
+					data: data,
+					success: function(data) {
+						if(data.message == "注册成功") {
+							alert("注册成功");
+							location.href = '/'
+						} else {
+							alert(data.message)
+						}
+
+					},
+					error: function(data) {
+						if(status == 'error') {
+							location.href = 'login';
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

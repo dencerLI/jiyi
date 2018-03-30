@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
+		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="stylesheets/index.css" />
+		<link rel="stylesheet" href="stylesheets/app.css" />
+		<script type="text/javascript" src="javascripts/polyfill.js"></script>
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="javascripts/axios.min.js"></script>
+		<script type="text/javascript" src="javascripts/vue.min.js"></script>
+		<script type="text/javascript" src="javascripts/vue-lazyload.js"></script>
+		<script>
+ Vue.use(VueLazyload)
+</script>
+		<script src="javascripts/pagination.js"></script>
+		<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+
+		<!--[if (gte IE 9)|!(IE)]><!-->
+		<!--<script src="stylesheets/assets/js/jquery.min.js"></script>-->
+		<!--<![endif]-->
+		<script src="stylesheets/assets/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+		<script src="javascripts/index.js"></script>
+	</head>
+
+	<body>
+		<header class="am-topbar am-topbar-fixed-top">
+			<div class="am-container">
+				<h4 class="am-topbar-brand">
+      <a href="#">记忆</a>
+    </h4>
+
+				<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span
+        class="am-icon-bars"></span></button>
+
+				<div class="am-collapse am-topbar-collapse" id="collapse-head">
+					<ul class="am-nav am-nav-pills am-topbar-nav menulist">
+
+						<li>
+							<a href="#">首页</a>
+						</li>
+						<!--
+						<li class="am-dropdown" data-am-dropdown>
+							<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+								下拉菜单 <span class="am-icon-caret-down"></span>
+							</a>
+							<ul class="am-dropdown-content">
+								<li class="am-dropdown-header">标题</li>
+								<li>
+									<a href="#">1. 默认样式</a>
+								</li>
+								<li>
+									<a href="#">2. 基础设置</a>
+								</li>
+								<li>
+									<a href="#">3. 文字排版</a>
+								</li>
+								<li>
+									<a href="#">4. 网格系统</a>
+								</li>
+							</ul>
+						</li>-->
+					</ul>
+
+					<div class="am-topbar-right">
+						<button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm" id="register"><span class="am-icon-pencil"></span> 注册</button>
+					</div>
+
+					<div class="am-topbar-right">
+						<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" id="login"><span class="am-icon-user"></span> 登录</button>
+					</div>
+					<div class="am-topbar-right my-tx">
+						<div class="mir-tx" id="geren" style="margin-top: 9px;">
+							<img id="myimg" v-bind:src="message" />
+						</div>
+						<p></p>
+						<a id="tui1" style="color: #0ca50c;">个人中心</a>
+						<a id="tui">退出</a>
+
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="get">
+			<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
+				<ul class="am-slides">
+					<li><img src="/images/222.png" /></li>
+					<li><img src="/images/2.png" /></li>
+					<li><img src="/images/3.png" /></li>
+				</ul>
+			</div>
+
+			<!--<div class="am-btn-toolbar">
+				<button type="button" class="am-btn am-btn-primary js-demo-slider-btn" data-action="add">添加 slide</button>
+				<button type="button" class="am-btn am-btn-danger js-demo-slider-btn" data-action="remove">移除 slide</button>
+			</div>-->
+		</div>
+
+		<div class="detail">
+			<div class="am-g am-container">
+				<div class="am-u-lg-12">
+					<h2 class="detail-h2">梦想和坚持，还有你失去的最珍贵的回忆</h2>
+					<h2><span class="am-icon-bookmark" style="color: red; margin-right: 10px; margin-top: 10px;"></span>最新文章</h2>
+					<div class="am-g" id="isre">
+						<div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb kh" v-for="n in 4">
+							<div class="isquan">
+								<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 tx-img" v-if="isdata">
+
+									<div v-if="isdata[n-1].imgL1==null">
+										<img src='images/21.jpg' />
+									</div>
+									<div v-else-if="isdata[n-1].imgL1==''">
+										<img src='images/21.jpg' />
+									</div>
+									<div v-else-if="isdata[n-1].imgL1==undefined">
+										<img src='images/21.jpg' />
+									</div>
+									<div v-else>
+										<img v-bind:temmm='isdata[n-1].imgL1' v-lazy='isdata[n-1].imgL1' />
+									</div>
+								</div>
+								<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 detail-mb1" v-if="isdata">
+									<div class="mir-tx">
+										<!--<div v-if="isdata[n-1].images==null">
+											<img src="images/timg.jpg" />
+										</div>
+										<div v-else-if="isdata[n-1].images==''">
+											<img src="images/timg.jpg" />
+										</div>
+										<div v-else-if="isdata[n-1].images=='null'">
+											<img src="images/timg.jpg" />
+										</div>
+										<div v-else-if="isdata[n-1].images==undefined">
+											<img src="images/timg.jpg" />
+										</div>
+										<div v-else>
+											<img v-bind:src="isdata[n-1].images"/>
+										</div>-->
+										<img src="images/timg.jpg" v-if="isdata[n-1].images==null" />
+										<img src="images/timg.jpg" v-else-if="isdata[n-1].images==''" />
+										<img src="images/timg.jpg" v-else-if="isdata[n-1].images=='null'" />
+										<img src="images/timg.jpg" v-else-if="isdata[n-1].images==undefined" />
+										<img v-lazy="isdata[n-1].images" v-else/>
+									</div>
+									<div v-if="isdata[n-1].username==null">
+										<p class="mir-name isqf">游客</p>
+									</div>
+									<div v-else-if="isdata[n-1].username==''">
+										<p class="mir-name isqf">游客</p>
+									</div>
+									<div v-else-if="isdata[n-1].username==undefined">
+										<p class="mir-name isqf">游客</p>
+									</div>
+									<div v-else>
+										<p class="mir-name isqf">{{isdata[n-1].username}}</p>
+									</div>
+								</div>
+								<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 detail-mb" v-if="isdata">
+									<h3 class="detail-h3" v-on:click="greet" v-bind:id='isdata[n-1].id'>
+                                         {{guo(isdata[n-1].bt)}}
+                                    </h3>
+									<div v-if="isdata[n-1].file.length>30">
+										<p class="detail-p">
+											{{guo(isdata[n-1].file).substring(0, 30)+ "..."}}
+										</p>
+									</div>
+									<div v-else>
+										<p class="detail-p">
+											{{isdata[n-1].file}}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<h2><span class="am-icon-bookmark meta" style="color: red; margin-right: 10px;"></span>文章分类</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="am-g-fixed blog-fixed">
+			<ol class="am-breadcrumb am-breadcrumb-slash" id="cgm">
+				<li id="all" v-on:click="flei" v-bind:class="{iscolor:0==guigeSpan}">全部</li>
+				<li id="1" v-on:click="flei" v-bind:class="{iscolor:1==guigeSpan}">技术文章</li>
+				<li id="2" v-on:click="flei" v-bind:class="{iscolor:2==guigeSpan}">生活百科</li>
+				<li id="3" v-on:click="flei" v-bind:class="{iscolor:3==guigeSpan}">原创●新闻</li>
+
+			</ol>
+			<div class="am-u-md-8 am-u-sm-12" id="islist">
+				<article v-bind:mmm="mrdata1" class="am-g blog-entry-article mee" v-for="n in mrdata1">
+					<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+						<img v-if="mrdata[n-1].imgL1==null" src='images/21.jpg' class="am-u-sm-12 shit" />
+						<img v-else-if="mrdata[n-1].imgL1==''" src='images/21.jpg' class="am-u-sm-12 shit" />
+						<img v-else-if="mrdata[n-1].imgL1==undefined" src='images/21.jpg' class="am-u-sm-12 shit" />
+						<img v-else v-lazy='mrdata[n-1].imgL1' alt="" class="am-u-sm-12 shit">
+					</div>
+					<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
+						<span>
+							<a class="blog-color" v-if="mrdata[n-1].username==null">游客&nbsp;</a>
+							<a class="blog-color" v-else-if="mrdata[n-1].username==''">游客&nbsp;</a>
+							<a class="blog-color" v-else-if="mrdata[n-1].username==undefined">游客&nbsp;</a>
+							<a class="blog-color" v-else>{{mrdata[n-1].username}}&nbsp;</a>
+						</span>
+						<h1 class="mgt" v-on:click="scr" v-bind:id='mrdata[n-1].id'><a>{{safeStr(mrdata[n-1].bt).substring(0, 10) + "..."}}</a></h1>
+						<p class="mybt1" v-on:click="scr" style="cursor:pointer;word-break:break-word;" v-bind:id='mrdata[n-1].id'>{{safeStr(mrdata[n-1].file).substring(0, 78) + "..."}}</p>
+						<p>
+							<a href="" class="blog-continue">continue reading</a>
+						</p>
+					</div>
+				</article>
+			</div>
+			<div class="am-u-md-4 am-u-sm-12 blog-sidebar">
+				<div class="blog-sidebar-widget blog-bor">
+					<h2 class="blog-text-center blog-title"><span>About ME</span></h2>
+					<img src="images/likun.jpg" alt="about me" class="blog-entry-img1">
+					<p>李昆</p>
+					<p>
+						我是李昆，这是我的首个网站平台，欢迎大家来小站逛逛
+					</p>
+					<p>当黑夜退去，繁华落尽，你拿什么证明你在这个世界存在过？</p>
+				</div>
+				<div class="blog-sidebar-widget blog-bor">
+					<h2 class="blog-text-center blog-title"><span>Contact ME</span></h2>
+					<p>
+						<a><span class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
+						<a><span class="am-icon-github am-icon-fw blog-icon"></span></a>
+						<a><span class="am-icon-weibo am-icon-fw blog-icon"></span></a>
+						<a><span class="am-icon-reddit am-icon-fw blog-icon"></span></a>
+						<a><span class="am-icon-weixin am-icon-fw blog-icon"></span></a>
+					</p>
+				</div>
+				<div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+					<h2 class="blog-title"><span>TAG cloud</span></h2>
+					<div class="am-u-sm-12 blog-clear-padding">
+						<a class="blog-tag">技术</a>
+						<a class="blog-tag">前端开发</a>
+						<a class="blog-tag">HTML5</a>
+						<a class="blog-tag">javascript</a>
+						<a class="blog-tag">jquery</a>
+						<a class="blog-tag">node.js</a>
+						<a class="blog-tag">mysql</a>
+						<a class="blog-tag">vue.js</a>
+					</div>
+				</div>
+				<div class="blog-sidebar-widget blog-bor">
+					<h2 class="blog-title"><span>寄语</span></h2>
+					<ul class="am-list">
+						<li>
+							<a href="#">每个人都有一个死角， 自己走不出来，别人也闯不进去。</a>
+						</li>
+						<li>
+							<a href="#">我把最深沉的秘密放在那里。</a>
+						</li>
+						<li>
+							<a href="#">你不懂我，我不怪你。</a>
+						</li>
+						<li>
+							<a href="#">每个人都有一道伤口， 或深或浅，盖上布，以为不存在。</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="am-u-md-12 am-u-sm-12">
+				<!--<ul class="am-pagination am-pagination-centered" id="fen">
+
+				</ul>-->
+				<!--<div id="app" style="">
+					<pagination :show-pages="showPages" :total-pages="totalPages" ref="pagination"></pagination>
+				</div>-->
+				 <div id="app" class="text-right" style="text-align: center;">
+            <navigation :pages="pages" :current.sync="pageNo" @navpage="pageList"></navigation>
+        </div>
+			</div>
+		</div>
+		
+
+		<div class="about">
+			<div class="am-g am-container">
+				<div class="am-u-lg-12">
+					<h2 class="about-title about-color">欢迎大家来逛逛小站，没事走一走看一看自己喜欢的文章，自己写下的回忆</h2>
+
+					<div class="am-g">
+
+						<div class="am-u-lg-12 am-u-md-8 am-u-sm-12">
+							<h4 class="about-color">关于我们</h4>
+
+							<p>我们只是我们自己，并没有所谓的公司
+							</p>
+							<h4 class="about-color">团队介绍</h4>
+
+							<p>我只有自己，我没有团队，我只想给我逝去的回忆留下点影子</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="footer">
+			<p>© 2017
+				<a>www.mefat.club</a> developer
+				<a></a>likun</p>
+		</footer>
+
+		<script>
+			
+		</script>
+	</body>
+
+</html>

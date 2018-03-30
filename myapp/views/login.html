@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
+		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="stylesheets/login.css" />
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="stylesheets/assets/js/amazeui.js" ></script>
+		<script type="text/javascript" src="javascripts/jquery.cookie.js" ></script>
+		<style>
+			.header {
+				text-align: center;
+			}
+			
+			.header h1 {
+				font-size: 200%;
+				color: #333;
+				margin-top: 30px;
+			}
+			
+			.header p {
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="am-g">
+				<h1>欢迎来到记忆的家</h1>
+				<p>这里是梦的储存，延续<br/>当你的心无处落脚的时候，或许这里可以让你小憩片刻</p>
+			</div>
+			<hr />
+		</div>
+		<div class="am-g">
+			<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+				<h3>登录</h3>
+				<hr>
+				<!--<div class="am-btn-group">
+      <a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i> Google+</a>
+      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i> stackOverflow</a>
+    </div>-->
+				<!--<br>
+    <br>-->
+
+				<div class="am-g am-container">
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
+							<input type="text" class="am-form-field" placeholder="Username" id="name">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+							<input type="password" class="am-form-field" placeholder="Password" id="pass">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<!--<div class="am-input-group"><input type="checkbox" />记住账号</div>-->
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
+						<button type="button" class="am-btn am-btn-primary am-btn-block" id="login">登录</button>
+						<a style="float: right; margin-top: 10px;" id="wj">忘记密码？</a><a href="/" style="float: right; margin-top: 10px; margin-right: 20px;">返回首页</a>
+					</div>
+					
+				</div>
+
+				<hr>
+				<p>© 2014 www.mefat.club developer .</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$("#wj").click(function(){
+				alert("暂未开放此功能！请联系管理员更改QQ348695165")
+			})
+			$('#login').click(function() {
+				var isname=$("#name").val();
+				var ispass=$("#pass").val();
+				var data={'name':isname,'pass':ispass}
+				$.ajax({
+					url: '/users/baozi',
+					type: 'post',
+					data: data,
+					success: function(data) {
+						
+						if(data.message=="查找失败"){
+							alert("用户名或密码错误")
+						}else{
+//							if(data[0].username!=null&&data[0].username!=''&&data[0].username!=undefined){
+//								$.cookie("name",data[0].username);
+//							}else{
+	                        if(data[0].username!=null&&data[0].username!=""&&data[0].username!=undefined){
+	                        	$.cookie("nicheng",data[0].username);
+	                        }else{
+	                        	$.cookie("nicheng","游客");
+	                        }
+								$.cookie("name",data[0].name);
+//							}
+							$.cookie("id",data[0].id);
+							$.cookie("message",data[0].message);
+							$.cookie("myurl",data[0].images);
+							location.href="/"
+						}
+
+					},
+					error: function(data) {
+						if(status == 'error') {
+							location.href = 'login';
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

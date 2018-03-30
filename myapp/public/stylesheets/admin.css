@@ -1,0 +1,7 @@
+.mir-tx{ width: 32px; height: 32px; border-radius: 5px; overflow: hidden; float: left; position: relative; margin-left: 10px;}
+.mir-tx img{ border: none; width: 100%; height: 100%;position: absolute;top: 0; left: 0;}
+.am-topbar-brand strong{ float: left;}
+#myN{ float: left; margin: 0; padding: 0; margin-left: 10px;}
+a{ cursor: pointer;}
+#listfile td{ font-size: 12px; height: 32px;white-space: nowrap;}
+#listfile textarea{ height: 23px;}

@@ -1,0 +1,162 @@
+a{cursor: pointer;}
+
+body{ font-family: "microsoft yahei"; width: 100%;
+  height:auto;
+  /*background:url(../images/mein.jpg) no-repeat left top;*/
+  background-size: 100% 100%;}
+.am-topbar{ }
+.get {
+      text-align: center;
+     
+    }
+    #islist{ padding: 0;}
+.mee{background: #fff;float: left;transition:all .2s linear; border: 1px solid #d8d8d8; border-radius: 3px;min-height: 80px; padding: 0; padding-top: 1rem;}
+.mee:hover{transform: translate3d(0 ,-2px,0);box-shadow: 0 5px 20px rgba(0,0,0,0.1);}
+    .get-title {
+      font-size: 200%;
+      border: 2px solid #fff;
+      padding: 20px;
+      display: inline-block;
+    }
+
+    .get-btn {
+      background: #fff;
+    }
+
+    .detail {
+      /*background: url(../images/top-bg.png) 0 0 repeat-x;*/
+    }
+.am-slider-default{ margin: 0px;}
+.am-slider-default .am-control-nav{ bottom: 20px;}
+    .detail-h2 {
+      text-align: center;
+      font-size: 150%;
+      margin: 40px 0;
+    }
+
+    .detail-h3 {
+      color: #1f8dd6;
+    }
+
+    .detail-p {
+      color: #7f8c8d;
+      word-wrap : break-word;
+    }
+
+    .detail-mb {
+      margin-bottom: 30px;
+    }
+
+    .hope {
+      background: #0bb59b;
+      padding: 50px 0;
+    }
+
+    .hope-img {
+      text-align: center;
+    }
+
+    .hope-hr {
+      border-color: #149C88;
+    }
+
+    .hope-title {
+      font-size: 140%;
+    }
+
+    .about {
+      background: #fff;
+      padding: 40px 0;
+      color: #7f8c8d;
+    }
+
+    .about-color {
+      color: #34495e;
+    }
+
+    .about-title {
+      font-size: 180%;
+      padding: 30px 0 50px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      color: #7f8c8d;
+      margin: 0;
+      padding: 15px 0;
+      text-align: center;
+      background: #2d3e50;
+    }
+   
+    .am-slides img{max-height: 400px;}
+    .tx-img{width: 100%; margin-top: 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; }
+    .tx-img img{ width:100%; height: 200px; border-top-left-radius: 5px; border-top-right-radius: 5px;}
+    .isquan{ width: 100%; height: 430px;overflow: hidden; border: 1px solid #efefef;border-radius: 3px;box-shadow: 0 5px 20px rgba(0,0,0,0.1);}
+    .am-container{ max-width: 1600px !important; }
+.am-collapse{ max-width: 1000px;margin: 0px auto;}
+.am-topbar-brand a{ color: #5eb95e; font-size: 28px;}
+.logo{ float: left; margin-left: 35px; margin-top: 9px;}
+.islogin{ position: absolute;top: 0; right: 0px; width: 80px; height: 60px; line-height: 60px;}
+.islogin a{ font-size:14px; color: #009E94; padding: 0px 5px; ;}
+.islogin a:hover{opacity: 0.9;}
+.mir-tx{ width: 32px; height: 32px; border-radius: 5px; overflow: hidden; float: left;}
+.mir-tx img{ border: none; width: 100%; height: 100%;}
+.mir-name{ font-size: 12px; margin: 0; padding: 0;height: 12px; line-height: 12px;  margin: 6px 0px 0px  5px; margin-left: 55px;}
+.detail-mb1{ margin-bottom: 10px; margin-top: 10px;}
+.mir-top10{ margin-top: 10px;}
+.my-tx{ height:50px; min-width: 175px; display: none;}
+.my-tx p{ float: left; margin-top: 1rem; margin-left: 5px;}
+.my-tx a{ float: right; margin-top: 1rem; margin-left: 5px; color: #1f8dd6;}
+/*.mir-border{ border: 1px solid #095F8A;}*/
+/*.mir-border-bottom{ border-bottom: 1px solid #095F8A;}*/
+.mybt1{word-wrap : normal|break-word;  
+white-space:pre-warp;  
+word-wrapL:break-word;
+word-break: break-all;}
+    .mir-bottom{ margin-bottom: 5px;}
+/*.dd{float: none;}*/
+.mir-left{ float: left; width: 32px;}
+.mir-left p{ width: 100%; margin: 0px; text-align: center; margin-top: 3px;}
+#islist .mir-tx{ width: 45px; height: 45px;}
+#islist .mir-left{width: 45px; margin-left: 5px;}
+.detail-h3{ cursor: pointer;}
+.iscolor{color: #0CA50C;}
+.shit{width:33.9rem; height:22.845rem}
+
+.pagination{ width: 100%;}
+.pagination li{list-style: none;display: inline-block; }
+.pagination a{text-decoration: none}
+.pagination ul,li{margin:0;padding:0;}
+.pagination p{display: none;}
+.pagination li{
+  border: 1px solid #ddd;
+  text-decoration: none;
+  float: left;
+  /*padding: 6px 12px;*/
+  margin-left: -1px;
+  line-height: 33px;
+ height: auto;
+  color: #ccc;
+  cursor: pointer
+}
+.pagination li a{
+	padding: 6px 12px;
+}
+.page{width:34px;height: 38px;box-sizing: border-box;text-align: center;padding: 0;line-height: 38px}
+.pagination li:hover {
+  background-color: #eee;
+}
+.active{background: #009CDA; color: #fff !important;}
+.active a{color: #fff !important;}
+.highLight{background: #0e90d2;color: #fff;}
+.darkLight{color: grey;cursor: default;}
+#cgm li{ cursor: pointer;}
+
+
+@media only screen and (max-width: 1200px) {
+	.shit{width:28.9rem; height:18.845rem}
+}
+@media only screen and (max-width: 1024px) {
+	.shit{width:100%; height:22.845rem}
+}
+

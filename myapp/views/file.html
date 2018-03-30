@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>发表文章页</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
+		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="stylesheets/login.css" />
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="stylesheets/assets/js/amazeui.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+		<script type="text/javascript" src="javascripts/file.js"></script>
+		<!--<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js">
+		</script>
+		<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js">
+		</script>-->
+		<style>
+			.header {
+				text-align: center;
+			}
+			
+			.header h1 {
+				font-size: 200%;
+				color: #333;
+				margin-top: 30px;
+			}
+			
+			.header p {
+				font-size: 14px;
+			}
+			
+			#tet pre,
+			p,
+			span,
+			a,
+			b,
+			small,
+			div,
+			i {
+				border: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="am-g">
+				<h1>欢迎来到记忆的家</h1>
+				<p>这里是梦的储存，延续<br/>当你的心无处落脚的时候，或许这里可以让你小憩片刻</p>
+			</div>
+			<hr />
+		</div>
+		<div class="am-g">
+			<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+				<h3>发表文章</h3>
+				<hr>
+				<!--<div class="am-btn-group">
+      <a href="#" class="am-btn am-btn-secondary am-btn-sm"><i class="am-icon-github am-icon-sm"></i> Github</a>
+      <a href="#" class="am-btn am-btn-success am-btn-sm"><i class="am-icon-google-plus-square am-icon-sm"></i> Google+</a>
+      <a href="#" class="am-btn am-btn-primary am-btn-sm"><i class="am-icon-stack-overflow am-icon-sm"></i> stackOverflow</a>
+    </div>-->
+				<!--<br>
+    <br>-->
+
+				<div class="am-g am-container am-form">
+				<div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
+				    <select id="xxk" data-am-selected>
+							<option value="a" selected>文章分类</option>
+							<option value="1">技术文章</option>
+							<option value="2">生活百科</option>
+							<option value="3">原创●新闻</option>
+						</select>
+						</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-top: 10px;">
+						<input type="text" id="tit" class="am-u-lg-12 am-u-md-12 am-u-sm-12" placeholder="文章标题">
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<p contenteditable="true" id="tet" class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="min-height: 300px; border: 1px solid #ccc;"></p>
+						<form id='uploadForm' target="hidden-iframe" action='users/profilelist' method='post' encType="multipart/form-data">
+
+							<input type='submit' id="shang" style="display: none;" value='上传头像' class="uploading" />
+							<iframe name="hidden-iframe" id="miss" style="display: none; width: 150px;height: 50px;overflow: hidden; background-color: pink"></iframe>
+						</form>
+						<!--<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+						<script>
+							//							var ue = UE.getEditor('editor');
+							var ue = UE.getEditor('editor', {
+								//这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+								//toolbars:[['FullScreen','simpleupload' ,'Source', 'Undo', 'Redo','Bold','test']],
+								toolbars: [
+									['FullScreen', 'insertimage', 'Source', 'Undo', 'Redo', 'Bold', 'test']
+								],
+								//focus时自动清空初始化时的内容
+								autoClearinitialContent: true,
+								//关闭字数统计
+								wordCount: false,
+								//关闭elementPath
+								elementPathEnabled: false,
+								//默认的编辑区域高度
+								initialFrameHeight: 300
+								//更多其他参数，请参考ueditor.config.js中的配置项
+							})
+						</script>-->
+					</div>
+
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<button type="button" class="am-btn am-btn-primary am-btn-block" id="fa">发表</button>
+						<a href="/" style="float: right; margin-top: 10px; margin-right: 20px;">返回首页</a>
+						<a href="adminIndex" style="float: right; margin-top: 10px; margin-right: 20px;">返回个人中心</a>
+						<div class="yc" style="float: left; cursor: pointer; color: #5eb95e; margin-top: 10px; margin-right: 20px;">添加图片</div>
+					</div>
+
+				</div>
+
+				<hr>
+				<p>© 2014 www.mefat.club developer .</p>
+			</div>
+		</div>
+		<i id="deng" class="am-icon-spinner am-icon-spin am-icon-lg" style="display: none; position: fixed; top: 50%; left: 50%; margin-top: -0.8rem; margin-left: -0.8rem;webkit-animation: icon-spin 0.8s infinite linear;
+    animation: icon-spin 0.8s infinite linear;"></i>
+		<script type="text/javascript">
+			$('[contenteditable]').each(function() {
+				// 干掉IE http之类地址自动加链接
+				try {
+					document.execCommand("AutoUrlDetect", false, false);
+				} catch(e) {}
+
+				$(this).on('paste', function(e) {
+					e.preventDefault();
+					var text = null;
+
+					if(window.clipboardData && clipboardData.setData) {
+						// IE
+						text = window.clipboardData.getData('text');
+					} else {
+						text = (e.originalEvent || e).clipboardData.getData('text/plain') || prompt('在这里输入文本');
+					}
+					if(document.body.createTextRange) {
+						if(document.selection) {
+							textRange = document.selection.createRange();
+						} else if(window.getSelection) {
+							sel = window.getSelection();
+							var range = sel.getRangeAt(0);
+
+							// 创建临时元素，使得TextRange可以移动到正确的位置
+							var tempEl = document.createElement("span");
+							tempEl.innerHTML = "&#FEFF;";
+							range.deleteContents();
+							range.insertNode(tempEl);
+							textRange = document.body.createTextRange();
+							textRange.moveToElementText(tempEl);
+							tempEl.parentNode.removeChild(tempEl);
+						}
+						textRange.text = text;
+						textRange.collapse(false);
+						textRange.select();
+					} else {
+						// Chrome之类浏览器
+						document.execCommand("insertText", false, text);
+					}
+				});
+				// 去除Crtl+b/Ctrl+i/Ctrl+u等快捷键
+				$(this).on('keydown', function(e) {
+					// e.metaKey for mac
+					if(e.ctrlKey || e.metaKey) {
+						switch(e.keyCode) {
+							case 66: //ctrl+B or ctrl+b
+							case 98:
+							case 73: //ctrl+I or ctrl+i
+							case 105:
+							case 85: //ctrl+U or ctrl+u
+							case 117:
+								{
+									e.preventDefault();
+									break;
+								}
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

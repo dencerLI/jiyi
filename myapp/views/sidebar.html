@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>文章页</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
+		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
+		<style>
+			@media only screen and (min-width: 641px) {
+				.am-offcanvas {
+					display: block;
+					position: static;
+					background: none;
+				}
+				.am-offcanvas-bar {
+					position: static;
+					width: auto;
+					background: none;
+					-webkit-transform: translate3d(0, 0, 0);
+					-ms-transform: translate3d(0, 0, 0);
+					transform: translate3d(0, 0, 0);
+				}
+				.am-offcanvas-bar:after {
+					content: none;
+				}
+			}
+			
+			@media only screen and (max-width: 640px) {
+				.am-offcanvas-bar .am-nav>li>a {
+					color: #ccc;
+					border-radius: 0;
+					border-top: 1px solid rgba(0, 0, 0, .3);
+					box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05)
+				}
+				.am-offcanvas-bar .am-nav>li>a:hover {
+					background: #404040;
+					color: #fff
+				}
+				.am-offcanvas-bar .am-nav>li.am-nav-header {
+					color: #777;
+					background: #404040;
+					box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+					text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+					border-top: 1px solid rgba(0, 0, 0, .3);
+					font-weight: 400;
+					font-size: 75%
+				}
+				
+				.am-offcanvas-bar .am-nav>li.am-active>a {
+					background: #1a1a1a;
+					color: #fff;
+					box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3)
+				}
+				.am-offcanvas-bar .am-nav>li+li {
+					margin-top: 0;
+				}
+			}
+			
+			.my-head {
+				margin-top: 40px;
+				text-align: center;
+			}
+			
+			.my-button {
+				position: fixed;
+				top: 0;
+				right: 0;
+				border-radius: 0;
+			}
+			
+			.my-sidebar {
+				padding-right: 0;
+				border-right: 1px solid #eeeeee;
+			}
+			
+			.my-footer {
+				border-top: 1px solid #eeeeee;
+				padding: 10px 0;
+				margin-top: 10px;
+				text-align: center;
+			}
+			
+			.pinglun {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ispl {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+				display: none;
+			}
+			
+			#pl {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#pltj {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			
+			.gn {
+				height: 22px;
+			}
+			
+			.inname {
+				color: #0ca50c !important;
+			}
+			
+			.Hhuifu {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ishf {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			#hf {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#huifu {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			
+			.am-comment-main {
+				position: relative;
+				margin-left: 0px;
+			}
+			
+			.met {
+				position: absolute;
+				top: 83px;
+				right: 10px;
+				font-size: 12px;
+			}
+			
+			.met1 {
+				position: absolute;
+				top: 83px;
+				right: 55px;
+				font-size: 12px;
+				color: #5eb95e;
+				cursor: pointer;
+			}
+			
+			.ytx {
+				position: relative;
+			}
+			/*.fp{
+				position: absolute;
+				top: 83px;
+				right: 10px;
+				font-size: 12px;
+			}*/
+			
+			.ntx {
+				width: 32px;
+				height: 32px;
+				overflow: hidden;
+				border-radius: 32px;
+			}
+			
+			.ntx img {
+				width: 32px;
+				height: 32px;
+				border-radius: 32px;
+			}
+			
+			.ntime {
+				height: 32px;
+				line-height: 32px;
+				margin-left: 10px;
+				font-size: 13px;
+				color: #999;
+			}
+			
+			.ytx p {
+				font-size: 14px;
+				text-indent: 32px;
+			}
+			
+			.Hhuifu1 {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ishf1 {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			#hf1 {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#huifu1 {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			
+			.ytx2 {
+				position: relative;
+			}
+			/*.fp{
+				position: absolute;
+				top: 83px;
+				right: 10px;
+				font-size: 12px;
+			}*/
+			
+			.ntx2 {
+				width: 32px;
+				height: 32px;
+				overflow: hidden;
+				border-radius: 32px;
+			}
+			
+			.ntx2 img {
+				width: 32px;
+				height: 32px;
+				border-radius: 32px;
+			}
+			
+			.ntime2 {
+				height: 32px;
+				line-height: 32px;
+				margin-left: 10px;
+				font-size: 13px;
+				color: #999;
+			}
+			
+			.ytx2 p {
+				font-size: 14px;
+				text-indent: 42px;
+				padding: 0px;
+				margin: 0;
+			}
+			
+			.Hhuifu2 {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ishf2 {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			#hf2 {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#huifu2 {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			.am-comment-avatar{ margin: 1px 0px 0px 5px !important; width: 32px !important; height: 32px !important;}
+			#wz{line-height: 27px;
+    font-size: 14px;
+    font-family: sans-serif;}
+		</style>
+		<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
+		<script src="stylesheets/assets/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="javascripts/comment.js"></script>
+	</head>
+
+	<body>
+		<header class="am-g my-head">
+			<div class="am-u-sm-12 am-article">
+				<h1 class="am-article-title" id="mytitle">永远的蝴蝶</h1>
+				<p class="am-article-meta" id="myname">陈启佑（台湾）</p>
+			</div>
+		</header>
+		<hr class="am-article-divider" />
+		<div class="am-g am-g-fixed">
+			<div class="am-u-md-9 am-u-md-push-3">
+				<div class="am-g">
+					<div class="am-u-sm-12 am-u-sm-centered">
+						<div class="am-cf am-article">
+							<!--<div class="am-align-left">
+								<img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="" width="240">
+							</div>-->
+							<pre id="wz" style="margin-top: 0;word-wrap:break-word;"></pre>
+						</div>
+						<hr/>
+						<div class="gn">
+							<a class="pinglun"><i class="am-icon-commenting" style="margin-right: 5px;"></i>评论(<small>0</small>)</a>
+						</div>
+						<div class="ispl">
+							<textarea id="pl"></textarea>
+							<span id="pltj">评论提交</span>
+						</div>
+						<hr/>
+						<ul class="am-comments-list">
+							<!--<li class="am-comment">
+								<a href="#link-to-user-home">
+									<img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96/q/80" alt="" class="am-comment-avatar" width="48" height="48">
+								</a>
+								<div class="am-comment-main">
+									<header class="am-comment-hd">
+										<div class="am-comment-meta">
+											<a href="#link-to-user" class="am-comment-author">某人</a> 评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-12 15:30</time>
+										</div>
+									</header>
+									<div class="am-comment-bd">
+										<p>《永远的蝴蝶》一文，还吸收散文特长，多采用第一人称，淡化情节，体现一种思想寄托和艺术追求。</p>
+									</div>
+								</div>
+							</li>
+							<li class="am-comment">
+								<a href="#link-to-user-home">
+									<img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96/q/80" alt="" class="am-comment-avatar" width="48" height="48">
+								</a>
+								<div class="am-comment-main">
+									<header class="am-comment-hd">
+										<div class="am-comment-meta">
+											<a href="#link-to-user" class="am-comment-author">路人甲</a> 评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2014-7-13 0:03</time>
+										</div>
+									</header>
+									<div class="am-comment-bd">
+										<p>感觉仿佛是自身的遭遇一样，催人泪下</p>
+									</div>
+								</div>
+							</li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="am-u-md-3 am-u-md-pull-9 my-sidebar">
+				<div class="am-offcanvas" id="sidebar">
+					<div class="am-offcanvas-bar">
+						<ul class="am-nav">
+							<li>
+								<a href="/">返回首页</a>
+							</li>
+							<!--<li class="am-nav-header">目录</li>
+							<li>
+								<a href="#">原文</a>
+							</li>
+							<li>
+								<a href="#">作者简介</a>
+							</li>
+							<li>
+								<a href="#">文章赏析</a>
+							</li>
+							<li>
+								<a href="#">读者评论</a>
+							</li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<a href="#sidebar" class="am-btn am-btn-sm am-btn-success am-icon-bars am-show-sm-only my-button" data-am-offcanvas><span class="am-sr-only">侧栏导航</span></a>
+		</div>
+
+		<footer class="my-footer">
+			<p><br><small>© likun</small></p>
+		</footer>
+		<script type="text/javascript">
+			function userList(userid, L, plid) {
+				var data3 = {
+					'id': userid
+				}
+				$.ajax({
+					url: '/users/pipei',
+					type: 'post',
+					data: data3,
+					success: function(data) {
+						$(".am-comments-list li:eq(" + L + ") #meizi").attr("src", data.images);
+						if(data.username != null && data.username != "" && data.username != undefined) {
+							$(".am-comments-list li:eq(" + L + ") .inname").text(data.username);
+							$(".am-comments-list li:eq(" + L + ") .inname").attr("userid", userid);
+						} else {
+							$(".am-comments-list li:eq(" + L + ") .inname").text('某人');
+							$(".am-comments-list li:eq(" + L + ") .inname").attr("userid", userid);
+						}
+
+					}
+				})
+			}
+
+			function erc() {
+				$.ajax({
+					url: '/users/huicha',
+					type: 'post',
+					success: function(data) {
+						var data = JSON.parse(unescape(data))
+						function sj(h){
+							for(var pp=0;pp<data.length;pp++){
+								if(h==data[pp].id){
+									return data[pp].username;
+									return false;
+								}
+							}
+						}
+						for(var kj = 0; kj < $(".am-comments-list li").length; kj++) { //第一层循环有多少条评论
+							for(var to = 0; to < $(".ytx").length; to++) { //循环回复这条评论的有几个
+								var you1 = '';
+								for(var y1 = 0; y1 < data.length; y1++) {//循环回复这条评论的回复
+									if(data[y1].fenlei == 1 && data[y1].wenID == $(".ytx").eq(to).attr("wenID")&& data[y1].yid ==$(".ytx").eq(to).attr("id")) {
+										      var h=sj(data[y1].yid);
+												you1 += '<div class="ytx2" id=' + data[y1].id + ' wenID='+data[y1].wenID+' mid='+data[y1].mid+'>' +
+													'<div style="">' +
+													'<img src=' + data[y1].images + ' class="ntx2" />' +
+													'<span class="ntime2"><small style="color:#0ca50c; margim-right:10px;">' + data[y1].username + '</small>@<small style="color:#0ca50c; margim-right:10px;">' + h + '</small>&nbsp&nbsp' + data[y1].Ttime + '</span>' + '<span class="fp2" style="margin-left:10px;color:#5eb95e;cursor:pointer;font-size:12px;">回复</span>' +
+													'</div>' +
+													'<p>' + data[y1].file + '</p>' +
+													'<div class="am-comment-bd Tmoto2" style="display:none;padding-top:0px;">' +
+													'<div class="ishf2">' +
+													'<textarea id="hf2" placeholder=""></textarea>' +
+													'<span id="huifu2" class="huifu2">评论</span>' +
+													'</div>' +
+													'</div>' +
+													'</div>'
+
+									}
+
+								}
+								$(".Msh1").eq(to).html(you1);
+								var you2 = '';
+								for(var y1 = 0; y1 < data.length; y1++) {//循环回复这条评论的回复
+									if(data[y1].fenlei == 2 && data[y1].wenID == $(".ytx").eq(to).attr("wenID")&& data[y1].pinglunID ==$(".ytx").eq(to).attr("id")) {
+										       var h=sj(data[y1].yid);
+												you2 += '<div class="ytx2" id=' + data[y1].id + ' wenID='+data[y1].wenID+' mid='+data[y1].mid+'>' +
+													'<div style="">' +
+													'<img src=' + data[y1].images + ' class="ntx2" />' +
+													'<span class="ntime2"><small style="color:#0ca50c; margim-right:10px;">' + data[y1].username + '</small>@<small style="color:#0ca50c; margim-right:10px;">' + h + '</small>&nbsp&nbsp' + data[y1].Ttime + '</span>' + '<span class="fp2" style="margin-left:10px;color:#5eb95e;cursor:pointer;font-size:12px;">回复</span>' +
+													'</div>' +
+													'<p>' + data[y1].file + '</p>' +
+													'<div class="am-comment-bd Tmoto2" style="display:none;padding-top:0px;">' +
+													'<div class="ishf2">' +
+													'<textarea id="hf2" placeholder=""></textarea>' +
+													'<span id="huifu2" class="huifu2">评论</span>' +
+													'</div>' +
+													'</div>' +
+													'</div>'
+
+									}
+
+								}
+								$(".Msh1").eq(to).html($(".Msh1").eq(to).html()+you2);
+								
+							}
+						}
+$(".fp2").click(function() {
+											if($.cookie("name") == null || $.cookie("name") == "" || $.cookie("name") == undefined) {
+												alert("请先登录");
+												return false;
+											}
+											var ff = $(".fp2").index(this);
+											for(var j = 0; j < $(".Tmoto2").length; j++) {
+												if(j != ff) {
+													$(".Tmoto2").eq(j).slideUp();
+												} else {
+													$(".Tmoto2").eq(j).slideToggle();
+												}
+											}
+											$(".ishf2:eq(" + ff + ") textarea").attr("placeholder", '@  ' + $(".ntime2:eq(" + ff + ") small:eq("+0+")").text());
+
+										})
+
+										$(".huifu2").click(function() {
+											var jg = $(".huifu2").index(this);
+											var mtext = $(".ishf2:eq(" + jg + ") textarea").val();
+											var myfather = $(this).parents('.ytx2').attr('id'); //被回复留言的ID
+											var mid=$(this).parents('.ytx2').attr('mid'); 
+											var wenID = $(this).parents('.ytx2').attr('wenID'); //某个评论的ID
+											var myid = $.cookie("id"); //回复人的ID
+											var myurl = $.cookie("myurl");
+											var name = $.cookie("name");
+											var message = $.cookie("message");
+											var nicheng = $.cookie("nicheng");
+											var pinglunID=$(this).parents(".ytx").attr("id");
+//											if(mid==myid){alert("你不能回复自己的评论");return false;}
+											var datam = {
+												'content': mtext,
+												'youid': myfather,
+												'meid': myid,
+												'myurl': myurl,
+												'name': name,
+												'message': message,
+												'wenID': wenID,
+												'nicheng': nicheng,
+												'pinglunID':pinglunID,
+												'lei': 2
+											}
+											$.ajax({
+												url: '/users/hui',
+												type: 'post',
+												data: datam,
+												success: function(data) {
+													if(data == "回复成功") {
+														alert(data);
+														huifuzs();
+							                            erc(); //回复完执行
+													} else {
+														alert(data);
+													}
+												}
+											})
+										})
+					}
+				})
+
+			}
+
+			function huifuzs() {
+				
+							
+							
+				var dataH = {
+					'yid':' yid',
+					'id': 'id'
+				}
+				
+					$.ajax({
+						url: '/users/huicha',
+						type: 'post',
+						data: dataH,
+						success: function(data) {
+							if(data != '没有回复') {
+								var data = JSON.parse(unescape(data))
+								
+								//第一层
+								for(var g = 0; g < $(".am-comments-list li").length; g++) {
+								var id = $(".am-comments-list li:eq(" + g + ")").attr("id");
+								var you = '';
+								for(var y = 0; y < data.length; y++) {
+									if(data[y].fenlei == 0 && data[y].wenID == id) {
+										you += '<div class="ytx" id=' + data[y].id + ' wenID=' + data[y].wenID + ' mid='+data[y].mid+'>' +
+											'<div>' +
+											'<img src=' + data[y].images + ' class="ntx" />' +
+											'<span class="ntime"><small style="color:#0ca50c; margim-right:10px;">' + data[y].username + '</small>' + data[y].Ttime + '</span>' + '<span class="fp" style="margin-left:10px;color:#5eb95e;cursor:pointer;font-size:12px;">回复</span>' +
+											'</div>' +
+											'<p>' + data[y].file + '</p>' +
+											'<div class="am-comment-bd Tmoto1" style="display:none;padding-top:0px;">' +
+											'<div class="ishf1">' +
+											'<textarea id="hf1" placeholder=""></textarea>' +
+											'<span id="huifu1" class="huifu1">评论</span>' +
+											'</div>' +
+											'</div>' +
+											'<div class="Msh1"></div>' +
+											'</div>';
+									        
+									}
+
+								}
+									$(".Msh").eq(g).html(you)
+                          }//for
+                          
+                          
+										//第二层
+
+										$(".fp").click(function() {
+											if($.cookie("name") == null || $.cookie("name") == "" || $.cookie("name") == undefined) {
+												alert("请先登录");
+												return false;
+											}
+											var ff = $(".fp").index(this);
+											for(var j = 0; j < $(".Tmoto1").length; j++) {
+												if(j != ff) {
+													$(".Tmoto1").eq(j).slideUp();
+												} else {
+													$(".Tmoto1").eq(j).slideToggle();
+												}
+											}
+											$(".ishf1:eq(" + ff + ") textarea").attr("placeholder", '@  ' + $(".ntime:eq(" + ff + ") small").text());
+
+										})
+
+										$(".huifu1").click(function() {
+											var jg = $(".huifu1").index(this);
+											var mtext = $(".ishf1:eq(" + jg + ") textarea").val();
+											var myfather = $(this).parents('.ytx').attr('id'); //被回复留言的ID
+											var mid= $(this).parents('.ytx').attr('mid'); //被回复留言的ID
+											var wenID = $(this).parents('.ytx').attr('wenID'); //被回复留言的ID
+											var myid = $.cookie("id"); //回复人的ID
+											var myurl = $.cookie("myurl");
+											var name = $.cookie("name");
+											var message = $.cookie("message");
+											var nicheng = $.cookie("nicheng");
+//											if(mid==myid){
+//												alert("不允许回复自己的评论");
+//												return false;
+//											}
+											var datam = {
+												'content': mtext,
+												'youid': myfather,
+												'meid': myid,
+												'myurl': myurl,
+												'name': name,
+												'message': message,
+												'wenID': wenID,
+												'nicheng': nicheng,
+												'lei': 1
+											}
+											$.ajax({
+												url: '/users/hui',
+												type: 'post',
+												data: datam,
+												success: function(data) {
+													if(data == "回复成功") {
+														alert(data);
+														huifuzs();
+							                            erc(); //回复完执行
+													} else {
+														alert(data);
+													}
+												}
+											})
+										})
+							}
+						}
+					})
+				
+				
+			}
+
+			function huifu(nval, youid, meid, myurl, name, message, wenID, nicheng) {
+				var dataH = {
+					'content': nval,
+					'youid': youid,
+					'meid': meid,
+					'myurl': myurl,
+					'name': name,
+					'message': message,
+					'wenID': wenID,
+					'nicheng': nicheng,
+					'lei': 0
+				}
+				$.ajax({
+					url: '/users/hui',
+					type: 'post',
+					data: dataH,
+					success: function(data) {
+						if(data == "回复成功") {
+							alert(data);
+							huoqu();
+						} else {
+							alert(data);
+						}
+					}
+				})
+			}
+			var nr = '';
+
+			function pinglun(isid) {
+				nr = '';
+				var data2 = {
+					'id': isid
+				}
+				$.ajax({
+					url: '/users/selectPL',
+					type: 'post',
+					data: data2,
+					success: function(data) {
+						if(data.length > 0 && data != '没有评论') {
+							$(".pinglun small").text(data.length);
+							for(var i = 0; i < data.length; i++) {
+								if(data[i].userid == "" || data[i].userid == null || data[i].userid == undefined) {
+									var gjj = "某人"
+								} else {
+									var gjj = data[i].userid;
+								}
+								nr += '<li class="am-comment" id=' + data[i].id + '>' +
+									'<div class="am-comment-main">' +
+									'<header class="am-comment-hd">' +
+									'<img id="meizi" src="" alt="" class="am-comment-avatar" width="32" height="32">'+
+									'<div class="am-comment-meta">' +
+									'<a class="am-comment-author inname"></a> 评论于 <time datetime="" title="">' + data[i].endtime + '</time>' +
+									'</div>' +
+									'</header>' +
+									'<div class="am-comment-bd">' +
+									'<p>' + data[i].file + '</p>' +
+									'<span class="met" style="float:right; margin-right:10px;color:#5eb95e;cursor:pointer;">回复</span>' +
+									'<i class="am-icon-heart-o met1"></i>' +
+									'</div>' +
+									'<div class="am-comment-bd Tmoto" style="display:none;padding-top:0px;">' +
+									'<div class="ishf">' +
+									'<textarea id="hf" placeholder=""></textarea>' +
+									'<span id="huifu" class="huifu">评论</span>' +
+									'</div>' +
+									'</div>' +
+									'<div class="am-comment-bd Msh"></div>'
+								'</div>' +
+								'</li>'
+							}
+							$(".am-comments-list").html(nr);
+
+							for(var i = 0; i < data.length; i++) {
+								userList(data[i].userid, i)
+							}
+							huifuzs();
+							erc(); //回复完执行
+							$(".met").click(function() {
+								if($.cookie("name") == null || $.cookie("name") == "" || $.cookie("name") == undefined) {
+									alert("请先登录");
+									return false;
+								}
+								var ff = $(".met").index(this);
+								for(var j = 0; j < $(".Tmoto").length; j++) {
+									if(j != ff) {
+										$(".Tmoto").eq(j).slideUp();
+									} else {
+										$(".Tmoto").eq(j).slideToggle();
+									}
+								}
+								$(".ishf:eq(" + ff + ") textarea").attr("placeholder", '@  ' + $(".inname").eq(ff).text());
+							})
+
+							$(".huifu").click(function() {
+								var eit = $(".huifu").index(this);
+								var nval = $(".ishf:eq(" + eit + ") textarea").val();
+								var youid = $(".inname").eq(eit).attr("userid");
+								var wenID = $(".am-comments-list li:eq(" + eit + ")").attr("id")
+								var meid = $.cookie("id");
+								var myurl = $.cookie("myurl");
+								var name = $.cookie("name");
+								var message = $.cookie("message");
+								var nicheng = $.cookie("nicheng");
+								huifu(nval, youid, meid, myurl, name, message, wenID, nicheng)
+							})
+						}
+					}
+				})
+			}
+
+			function getvl(name) {　　
+				var reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\s|&|$)", "i");　　
+				if(reg.test(location.href))　　 return unescape(RegExp.$2.replace(/\+/g, " "));　　
+				return "";
+			};
+
+			function huoqu() {
+				var id = getvl("id")
+				var data = {
+					'id': id
+				}
+				$.ajax({
+					url: '/users/Twen',
+					type: 'post',
+					data: data,
+					success: function(data) {
+						if(data.length != 0) {
+							$("#wz").html(data[0].file.replace(/\n/g, "</br>").replace(/\r\n/g,"</br>").replace(/\s/g, "&nbsp;&nbsp;&nbsp;").replace(/\@null/g, "</br>").replace(/\~/g, '</br>').replace(/@img/g, '<p><img style="max-width:100%;" /></p>'));
+							$("#mytitle").text(data[0].bt);
+							for(var u=0;u<$("#wz img").length;u++){
+							$("#wz img").eq(u).attr("src",$.parseJSON(data[0].imgL)[u]);
+							}
+							if(data[0].username != null && data[0].username != "" && data[0].username != undefined) {
+								$("#myname").text(data[0].username);
+								$("#myname").attr("tem", data[0].id);
+								pinglun(data[0].id)
+							} else {
+								$("#myname").text("游客");
+								$("#myname").attr("tem", data[0].id);
+								pinglun(data[0].id)
+							}
+
+						}
+					}
+				})
+			}
+			huoqu()
+
+			//评论功能
+		</script>
+	</body>
+
+</html>
