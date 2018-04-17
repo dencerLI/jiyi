@@ -3,12 +3,14 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>首页</title>
+		<title>青春记忆</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name='360_ssp_verify' content='c0e469e09d4a11917f8510d0340b97ea' />
+		<meta name="baidu_union_verify" content="c716b9fba7a7519a54f2d7f6b8301fb7">
 		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
 		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
 		<link rel="stylesheet" href="stylesheets/index.css" />
@@ -19,8 +21,8 @@
 		<script type="text/javascript" src="javascripts/vue.min.js"></script>
 		<script type="text/javascript" src="javascripts/vue-lazyload.js"></script>
 		<script>
- Vue.use(VueLazyload)
-</script>
+			Vue.use(VueLazyload)
+		</script>
 		<script src="javascripts/pagination.js"></script>
 		<!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
@@ -34,13 +36,14 @@
 		<script src="stylesheets/assets/js/amazeui.min.js"></script>
 		<script type="text/javascript" src="javascripts/jquery.cookie.js"></script>
 		<script src="javascripts/index.js"></script>
+
 	</head>
 
 	<body>
-		<header class="am-topbar am-topbar-fixed-top">
+		<header class="am-topbar am-topbar-fixed-top" style="background: url(images/bg.png) no-repeat; background-size:100% 100%;">
 			<div class="am-container">
 				<h4 class="am-topbar-brand">
-      <a href="#">记忆</a>
+      <img src="images/logo.png" style="width: 130px;"/>
     </h4>
 
 				<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only" data-am-collapse="{target: '#collapse-head'}"><span class="am-sr-only">导航切换</span> <span
@@ -52,6 +55,9 @@
 						<li>
 							<a href="#">首页</a>
 						</li>
+						<!--<li>
+							<a href="#">代理产品机器人</a>
+						</li>-->
 						<!--
 						<li class="am-dropdown" data-am-dropdown>
 							<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
@@ -98,9 +104,9 @@
 		<div class="get">
 			<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
 				<ul class="am-slides">
-					<li><img src="/images/222.png" /></li>
-					<li><img src="/images/2.png" /></li>
-					<li><img src="/images/3.png" /></li>
+					<li><img src="/images/banner1.jpg" /></li>
+					<li><img src="/images/bg2.jpg" /></li>
+					<li><img src="/images/bg5.jpg" /></li>
 				</ul>
 			</div>
 
@@ -114,7 +120,7 @@
 			<div class="am-g am-container">
 				<div class="am-u-lg-12">
 					<h2 class="detail-h2">梦想和坚持，还有你失去的最珍贵的回忆</h2>
-					<h2><span class="am-icon-bookmark" style="color: red; margin-right: 10px; margin-top: 10px;"></span>最新文章</h2>
+					<h2><span class="am-icon-bookmark" style="color: red; margin-right: 10px; margin-top: 10px;"></span>浏览排行</h2>
 					<div class="am-g" id="isre">
 						<div class="am-u-lg-3 am-u-md-6 am-u-sm-12 detail-mb kh" v-for="n in 4">
 							<div class="isquan">
@@ -204,7 +210,7 @@
 			</ol>
 			<div class="am-u-md-8 am-u-sm-12" id="islist">
 				<article v-bind:mmm="mrdata1" class="am-g blog-entry-article mee" v-for="n in mrdata1">
-					<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
+					<div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img" v-if="mrdata">
 						<img v-if="mrdata[n-1].imgL1==null" src='images/21.jpg' class="am-u-sm-12 shit" />
 						<img v-else-if="mrdata[n-1].imgL1==''" src='images/21.jpg' class="am-u-sm-12 shit" />
 						<img v-else-if="mrdata[n-1].imgL1==undefined" src='images/21.jpg' class="am-u-sm-12 shit" />
@@ -283,12 +289,11 @@
 				<!--<div id="app" style="">
 					<pagination :show-pages="showPages" :total-pages="totalPages" ref="pagination"></pagination>
 				</div>-->
-				 <div id="app" class="text-right" style="text-align: center;">
-            <navigation :pages="pages" :current.sync="pageNo" @navpage="pageList"></navigation>
-        </div>
+				<div id="app" class="text-right" style="text-align: center;">
+					<navigation :pages="pages" :current.sync="pageNo" @navpage="pageList"></navigation>
+				</div>
 			</div>
 		</div>
-		
 
 		<div class="about">
 			<div class="am-g am-container">
@@ -312,13 +317,16 @@
 		</div>
 
 		<footer class="footer">
-			<p>© 2017
-				<a>www.mefat.club</a> developer
-				<a></a>likun</p>
+			<p>© 2018
+				<a style="color: #fff;">www.mefat.club</a> developer
+				<a></a> likun
+				<a style="color: #fff;" href='http://www.miibeian.gov.cn' target='_blank'>京ICP备18017945号-1</a>
+			</p>
 		</footer>
-
-		<script>
-			
+		<script type="text/javascript" src="javascripts/tj.js"></script>
+		<script type="text/javascript">
+			var all = new lltj();
+			all.all();
 		</script>
 	</body>
 

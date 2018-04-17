@@ -20,4 +20,7 @@ res.render('file', { title: 'Express' });
 router.get('/sidebar', function(req, res, next) {
 res.render('sidebar', { title: 'Express' });
 });
+router.get('/alladmin', function(req, res, next) {
+res.render('alladmin', { title: 'Express' });
+});
 module.exports = router;

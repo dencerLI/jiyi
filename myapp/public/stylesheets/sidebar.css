@@ -1,0 +1,325 @@
+			@media only screen and (min-width: 641px) {
+				.am-offcanvas {
+					display: block;
+					position: static;
+					background: none;
+				}
+				.am-offcanvas-bar {
+					position: static;
+					width: auto;
+					background: none;
+					-webkit-transform: translate3d(0, 0, 0);
+					-ms-transform: translate3d(0, 0, 0);
+					transform: translate3d(0, 0, 0);
+				}
+				.am-offcanvas-bar:after {
+					content: none;
+				}
+			}
+			
+			@media only screen and (max-width: 640px) {
+				.am-offcanvas-bar .am-nav>li>a {
+					color: #ccc;
+					border-radius: 0;
+					border-top: 1px solid rgba(0, 0, 0, .3);
+					box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05)
+				}
+				.am-offcanvas-bar .am-nav>li>a:hover {
+					background: #404040;
+					color: #fff
+				}
+				.am-offcanvas-bar .am-nav>li.am-nav-header {
+					color: #777;
+					background: #404040;
+					box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+					text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+					border-top: 1px solid rgba(0, 0, 0, .3);
+					font-weight: 400;
+					font-size: 75%
+				}
+				
+				.am-offcanvas-bar .am-nav>li.am-active>a {
+					background: #1a1a1a;
+					color: #fff;
+					box-shadow: inset 0 1px 3px rgba(0, 0, 0, .3)
+				}
+				.am-offcanvas-bar .am-nav>li+li {
+					margin-top: 0;
+				}
+			}
+			
+			.my-head {
+				margin-top: 40px;
+				text-align: center;
+			}
+			
+			.my-button {
+				position: fixed;
+				top: 0;
+				right: 0;
+				border-radius: 0;
+			}
+			
+			.my-sidebar {
+				padding-right: 0;
+				border-right: 1px solid #eeeeee;
+			}
+			
+			.my-footer {
+				border-top: 1px solid #eeeeee;
+				padding: 10px 0;
+				margin-top: 10px;
+				text-align: center;
+			}
+			
+			.pinglun {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ispl {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+				display: none;
+			}
+			
+			#pl {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#pltj {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			
+			.gn {
+				height: 22px;
+			}
+			
+			.inname {
+				color: #0ca50c !important;
+			}
+			
+			.Hhuifu {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ishf {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			#hf {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#huifu {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			
+			.am-comment-main {
+				position: relative;
+				margin-left: 0px;
+			}
+			
+			.met {
+				 float: right;
+				font-size: 12px;
+			}
+			
+			.met1 {
+				float: right;
+				 margin-right: 10px;
+				font-size: 12px;
+				color: #5eb95e;
+				cursor: pointer;
+			}
+			
+			.ytx {
+				position: relative;
+			}
+			/*.fp{
+				position: absolute;
+				top: 83px;
+				right: 10px;
+				font-size: 12px;
+			}*/
+			
+			.ntx {
+				width: 32px;
+				height: 32px;
+				overflow: hidden;
+				border-radius: 32px;
+			}
+			
+			.ntx img {
+				width: 32px;
+				height: 32px;
+				border-radius: 32px;
+			}
+			
+			.ntime {
+				height: 32px;
+				line-height: 32px;
+				margin-left: 10px;
+				font-size: 13px;
+				color: #999;
+			}
+			
+			.ytx p {
+				font-size: 14px;
+				text-indent: 32px;
+			}
+			
+			.Hhuifu1 {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ishf1 {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			#hf1 {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#huifu1 {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			
+			.ytx2 {
+				position: relative;
+			}
+			/*.fp{
+				position: absolute;
+				top: 83px;
+				right: 10px;
+				font-size: 12px;
+			}*/
+			
+			.ntx2 {
+				width: 32px;
+				height: 32px;
+				overflow: hidden;
+				border-radius: 32px;
+			}
+			
+			.ntx2 img {
+				width: 32px;
+				height: 32px;
+				border-radius: 32px;
+			}
+			
+			.ntime2 {
+				height: 32px;
+				line-height: 32px;
+				margin-left: 10px;
+				font-size: 13px;
+				color: #999;
+			}
+			
+			.ytx2 p {
+				font-size: 14px;
+				text-indent: 42px;
+				padding: 0px;
+				margin: 0;
+			}
+			
+			.Hhuifu2 {
+				float: right;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+			.ishf2 {
+				margin-top: 10px;
+				height: auto;
+				overflow: hidden;
+			}
+			
+			#hf2 {
+				width: 100%;
+				height: 80px;
+				resize: none;
+				text-indent: 10px;
+				padding: 10px 0px;
+				font-size: 12px;
+			}
+			
+			#huifu2 {
+				display: block;
+				float: right;
+				cursor: pointer;
+				margin-top: 10px;
+				width: 80px;
+				height: 28px;
+				line-height: 28px;
+				color: #fff;
+				background: #4dc86f;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 3px;
+			}
+			.am-comment-avatar{ margin: 1px 0px 0px 5px !important; width: 32px !important; height: 32px !important;}
+			#wz{line-height: 27px;
+    font-size: 14px;
+    font-family: sans-serif;}
+    .isleftme img{ width: 100%;}
+    .am-g-fixed{ max-width: 1200px;}
+    .ytx p{ margin: 0; padding: 0;text-indent:42px;}

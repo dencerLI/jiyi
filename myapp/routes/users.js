@@ -13,10 +13,13 @@ var nodemailer = require('nodemailer');
 /* GET users listing. */
 var mac = {};
 var zmac = {};
+var zmac1 = {};
 var mu = {};
 var fan = {};
-var yzm = {};
+var yzm = [];
+var yzm1 = {};
 var myqq = {};
+var myqq1 = {};
 var mulist = {};
 
 function safeStr(str) {
@@ -42,19 +45,25 @@ router.post('/zhuce', function(req, res, next) {
 	var md5 = crypto.createHash("md5");
 	var newPas = md5.update(pass).digest("hex");
 	console.log(newPas)
-	if(name != myqq) {
-		zmac.message = "验证码不正确"
-		res.send(zmac);
-		return false;
-	}
-	if(myyzm != yzm) {
-		zmac.message = "验证码不正确"
-		res.send(zmac);
-		return false;
-	}
-	zmac = {}
-	registerUse1(name, newPas, age, function(mac) {
-		res.send(zmac)
+	var sql17 = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
+	var inserts17 = ['session', 'name', name, 'yzm', myyzm];
+	sql17 = testm.format(sql17, inserts17);
+	testm.query(sql17, function(err, rows, fields) {
+		try {
+			if(rows.length == 0) {
+				zmac.message = "验证码不正确"
+				res.send(zmac);
+				return false;
+			} else {
+				zmac = {}
+				registerUse1(name, newPas, age, function(mac) {
+					res.send(zmac)
+				})
+			}
+
+		} catch(e) {
+			//TODO handle the exception
+		}
 	})
 });
 //个人资料修改
@@ -130,7 +139,66 @@ router.post('/gai', function(req, res, next) {
 		}
 	})
 })
+//文章浏览量统计
+router.post('/tongji', function(req, res, next) {
+	var id = req.body.id;
+	if(id=="all"){
+		var name="348695165@qq.com"
+		var sql14 = "SELECT * FROM ?? WHERE ?? = ?";
+	    var inserts14 = ['wo', 'name', name];
+	    sql14 = testm.format(sql14, inserts14);
+	   testm.query(sql14, function(err, rows, fields) {
+		 if(rows[0] == undefined) {
+			res.send('文章不存在')
+		 } else {
+			var mm=rows[0].all;
+			mm=mm+1;
+			    var sql2 = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+				var inserts2 = ['wo', 'all', mm, 'name', name];
+				sql2 = testm.format(sql2, inserts2);
+				testm.query(sql2, function(err, result) {
+					try {
+						console.log("更新成功")
+						res.send('yes is tongji')
+					} catch(e) {
+						console.log(e);
+					}
 
+				});
+		}
+	})
+	}else{
+	var sql14 = "SELECT * FROM ?? WHERE ?? = ?";
+	var inserts14 = ['usern', 'id', id];
+	sql14 = testm.format(sql14, inserts14);
+	testm.query(sql14, function(err, rows, fields) {
+		if(rows[0] == undefined) {
+			res.send('文章不存在')
+		} else {
+			var mm=rows[0].tj;
+			console.log(mm)
+			if(mm=="null"||mm==null){mm=1;}else{
+				mm=mm+1;
+			}
+			console.log(mm)
+			console.log(id)
+			    var sql2 = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+				var inserts2 = ['usern', 'tj', mm, 'id', id];
+				sql2 = testm.format(sql2, inserts2);
+				testm.query(sql2, function(err, result) {
+					try {
+						console.log("更新成功")
+						
+					} catch(e) {
+
+						console.log(e);
+					}
+
+				});
+		}
+	})
+}
+})
 function p(s) {
 	return s < 10 ? '0' + s : s;
 }
@@ -194,8 +262,8 @@ router.post('/hui', function(req, res, next) {
 					}
 
 				});
-			}else{
-			 res.send('请重新登陆再发表评论')
+			} else {
+				res.send('请重新登陆再发表评论')
 			}
 		}
 	})
@@ -225,7 +293,7 @@ router.post('/pinglun', function(req, res, next) {
 	var Euserid = req.body.userid;
 	var day2 = new Date();
 	day2.setTime(day2.getTime());
-	var Es2 = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate() + "  " + day2.getHours() + ":" + day2.getMinutes() + ":" + day2.getSeconds();
+	var Es2 = day2.getFullYear() + "-" + p(day2.getMonth() + 1) + "-" + p(day2.getDate()) + "  " + p(day2.getHours()) + ":" + p(day2.getMinutes()) + ":" + p(day2.getSeconds());
 	Efile = safeStr(Efile);
 	var Emyfile = {
 		wenID: EwenID,
@@ -239,7 +307,7 @@ router.post('/pinglun', function(req, res, next) {
 	testm.query(sql16, function(err, rows, fields) {
 		console.log("这一步不执行")
 		if(rows[0] == undefined) {
-		    res.send('请重新登陆再发表评论')
+			res.send('请重新登陆再发表评论')
 			return false;
 		} else {
 			if(rows[0].intma == Eintma1) { //如果匹配验证码成功那就执行
@@ -254,8 +322,8 @@ router.post('/pinglun', function(req, res, next) {
 					}
 
 				});
-			}else{
-			 res.send('请重新登陆再发表评论')
+			} else {
+				res.send('请重新登陆再发表评论')
 			}
 		}
 	})
@@ -300,12 +368,12 @@ router.post('/fa', function(req, res, next) {
 	var Emess = req.body.mess;
 	var Eusername = req.body.username;
 	var Eimgs = req.body.imgs;
-    var EimgL = req.body.imgl;
-    var EimgL1 = req.body.imgl1;
-     var Elei = req.body.lei;
-     var day2 = new Date();
+	var EimgL = req.body.imgl;
+	var EimgL1 = req.body.imgl1;
+	var Elei = req.body.lei;
+	var day2 = new Date();
 	day2.setTime(day2.getTime());
-     var Es2 = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate() + "  " + day2.getHours() + ":" + day2.getMinutes() + ":" + day2.getSeconds();
+	var Es2 = day2.getFullYear() + "-" + p(day2.getMonth() + 1) + "-" + p(day2.getDate()) + "  " + p(day2.getHours()) + ":" + p(day2.getMinutes()) + ":" + p(day2.getSeconds());
 	if(Ename == null || Ename == '' || Ename == undefined) {
 		res.send('请重新登陆')
 		return false;
@@ -315,7 +383,7 @@ router.post('/fa', function(req, res, next) {
 	sql11 = testm.format(sql11, inserts11);
 	testm.query(sql11, function(err, rows, fields) {
 		if(rows[0] == undefined) {
-
+           res.send('请重新登陆')
 		} else {
 			if(rows[0].intma == Emess) { //如果匹配验证码成功那就执行
 				var sql12 = "SELECT * FROM ?? WHERE ?? = ?";
@@ -329,10 +397,10 @@ router.post('/fa', function(req, res, next) {
 						name: Ename,
 						username: Eusername,
 						images: Eimgs,
-						imgL:EimgL,
-						imgL1:EimgL1,
-						lei:Elei,
-						sinTime:Es2
+						imgL: EimgL,
+						imgL1: EimgL1,
+						lei: Elei,
+						sinTime: Es2
 					}
 					if(rows[0] == undefined) {
 						var sql13 = "INSERT INTO ?? SET ?";
@@ -353,6 +421,8 @@ router.post('/fa', function(req, res, next) {
 						res.send('文章名已经存在了')
 					}
 				})
+			}else{
+				res.send('请重新登陆')
 			}
 		}
 	})
@@ -361,92 +431,92 @@ router.post('/fa', function(req, res, next) {
 //查询全部文章
 router.post('/allwen', function(req, res, next) {
 	var od = req.body.od;
-	var oall=req.body.oall;
+	var oall = req.body.oall;
 	console.log(oall)
-	
-	if(oall=="all"){
-	testm.query('select * from usern order by id desc', function(err, rows, fields) {
-		try {
-			var n = rows.length;
-			var ml = parseInt(n / 10);
-			if(ml < (n / 10)) {
-				ml = ml + 1;
+
+	if(oall == "all") {
+		testm.query('select * from usern order by id desc', function(err, rows, fields) {
+			try {
+				var n = rows.length;
+				var ml = parseInt(n / 10);
+				if(ml < (n / 10)) {
+					ml = ml + 1;
+				}
+
+				if(od != "all") {
+					var mtd = {};
+					var mtt = [];
+					if(od == 1) {
+						for(var h = (od - 1) * 9; h < od * 10; h++) {
+							if(rows[h] != undefined) {
+								mtt.push(rows[h]);
+							}
+						}
+					} //第一次请求
+					else {
+						for(var h = (od - 1) * 10; h < od * 10; h++) {
+							if(rows[h] != undefined) {
+								mtt.push(rows[h]);
+							}
+						}
+					}
+					mtd.allwen = mtt;
+					mtd.lth = ml;
+
+					res.send(escape(JSON.stringify(mtd)))
+				} else {
+					res.send(escape(JSON.stringify(rows)))
+				}
+			} catch(e) {
+
+				console.log(e)
 			}
 
-			if(od != "all") {
-				var mtd = {};
-				var mtt = [];
-				if(od==1){
-				for(var h = (od - 1) * 9; h < od * 10; h++) {
-					if(rows[h] != undefined) {
-						mtt.push(rows[h]);
-					}
+		})
+	} //查询全部
+	else {
+		var sql111 = "SELECT * FROM ?? WHERE ?? = ? ORDER BY ID DESC";
+		var inserts111 = ['usern', 'lei', oall];
+		sql111 = testm.format(sql111, inserts111);
+		testm.query(sql111, function(err, rows, fields) {
+			try {
+				console.log(oall)
+				var n = rows.length;
+				var ml = parseInt(n / 10);
+				if(ml < (n / 10)) {
+					ml = ml + 1;
 				}
-				}//第一次请求
-				else{
-				  for(var h = (od - 1) * 10; h < od * 10; h++) {
-					if(rows[h] != undefined) {
-						mtt.push(rows[h]);
-					}
-				  }
-				}
-				mtd.allwen = mtt;
-				mtd.lth = ml;
 
-				res.send(escape(JSON.stringify(mtd)))
-			} else {
-				res.send(escape(JSON.stringify(rows)))
+				if(od != "all") {
+					var mtd = {};
+					var mtt = [];
+					if(od == 1) {
+						for(var h = (od - 1) * 9; h < od * 10; h++) {
+							if(rows[h] != undefined) {
+								mtt.push(rows[h]);
+							}
+						}
+					} //第一次请求
+					else {
+						for(var h = (od - 1) * 10; h < od * 10; h++) {
+							if(rows[h] != undefined) {
+								mtt.push(rows[h]);
+							}
+						}
+					}
+					mtd.allwen = mtt;
+					mtd.lth = ml;
+
+					res.send(escape(JSON.stringify(mtd)))
+				} else {
+					res.send(escape(JSON.stringify(rows)))
+				}
+			} catch(e) {
+
+				console.log(e)
 			}
-		} catch(e) {
 
-			console.log(e)
-		}
-
-	})
-	}//查询全部
-	else{
-	var sql111 = "SELECT * FROM ?? WHERE ?? = ? ORDER BY ID DESC";
-				var inserts111 = ['usern', 'lei', oall];
-				sql111 = testm.format(sql111, inserts111);
-	testm.query(sql111, function(err, rows, fields) {
-		try {
-		console.log(oall)
-			var n = rows.length;
-			var ml = parseInt(n / 10);
-			if(ml < (n / 10)) {
-				ml = ml + 1;
-			}
-
-			if(od != "all") {
-				var mtd = {};
-				var mtt = [];
-				if(od==1){
-				for(var h = (od - 1) * 9; h < od * 10; h++) {
-					if(rows[h] != undefined) {
-						mtt.push(rows[h]);
-					}
-				}
-				}//第一次请求
-				else{
-				  for(var h = (od - 1) * 10; h < od * 10; h++) {
-					if(rows[h] != undefined) {
-						mtt.push(rows[h]);
-					}
-				  }
-				}
-				mtd.allwen = mtt;
-				mtd.lth = ml;
-
-				res.send(escape(JSON.stringify(mtd)))
-			} else {
-				res.send(escape(JSON.stringify(rows)))
-			}
-		} catch(e) {
-
-			console.log(e)
-		}
-
-	})
+		})
 	}
 })
 
@@ -489,18 +559,62 @@ router.post('/indexcha', function(req, res, next) {
 //删除个人文章
 router.post('/indexDel', function(req, res, next) {
 	var fileid = req.body.isid;
-	var sql = "DELETE FROM ?? WHERE ?? = ? ";
-	var inserts = ['usern', 'id', fileid];
-	sql = testm.format(sql, inserts);
-	testm.query(sql, function(err, rows, fields) {
-		//		console.log(rows[0])
+	var sql1 = "SELECT * FROM ?? WHERE ?? = ? ";
+	var inserts1 = ['usern', 'id', fileid];
+	sql1 = testm.format(sql1, inserts1);
+	testm.query(sql1, function(err, rows, fields) {
+		var gt2 = rows[0].imgL;
+		gt2 = gt2.replace(/\"/g, "");
+		gt2 = gt2.replace(/\/imglist/g, "");
+		//			gt2 = gt2.replace(/\//g,"\\");
+		gt2 = gt2.replace("[", "");
+		gt2 = gt2.replace("]", "");
+		var strs = new Array(); //定义一数组 
+		strs = gt2.split(","); //字符分割
+		console.log(strs)
 		try {
-			res.send("删除成功")
-		} catch(e) {
+			for(var i = 0; i < strs.length; i++) {
+				fs.unlinkSync('imglist/' + strs[i], function(err) {
+					try {
+						console.log('文件:' + filepath + '删除成功！');
+					} catch(e) {
+						console.log(e);
+						var fileid = req.body.isid;
+						var sql = "DELETE FROM ?? WHERE ?? = ? ";
+						var inserts = ['usern', 'id', fileid];
+						sql = testm.format(sql, inserts);
+						testm.query(sql, function(err, rows, fields) {
+							//		console.log(rows[0])
+							try {
+								res.send("删除成功")
+							} catch(e) {
 
+								console.log(e)
+							}
+
+						})
+					}
+
+				})
+			}
+
+		} catch(e) {
 			console.log(e)
 		}
+		var fileid = req.body.isid;
+		var sql = "DELETE FROM ?? WHERE ?? = ? ";
+		var inserts = ['usern', 'id', fileid];
+		sql = testm.format(sql, inserts);
+		testm.query(sql, function(err, rows, fields) {
+			//		console.log(rows[0])
+			try {
+				res.send("删除成功")
+			} catch(e) {
 
+				console.log(e)
+			}
+
+		})
 	})
 })
 
@@ -545,27 +659,26 @@ router.post('/profilelist', function(req, res, next) {
 		if(err) {
 			console.error('[System] ' + err.message);
 		} else {
-             var mull=[];
+			var mull = [];
 			var fileCount = req.files.length;
-			console.log(fileCount)
+			console.log(req)
 			for(var j = 0; j < fileCount; j++) {
-				
+
 				var oldP = req.files[j].path;
-				var newP = uploadDir+req.files[j].fieldname + '-' + Date.now() + '.' + req.files[j].originalname.split(".")[1];
-				mull.push("/"+newP);
-//              var newP = uploadDir+req.files[j].fieldname + '-' + Date.now() + '.png';
+				var newP = uploadDir + req.files[j].fieldname + '-' + Date.now() + '.' + req.files[j].originalname.split(".")[1];
+				mull.push("/" + newP);
+				//              var newP = uploadDir+req.files[j].fieldname + '-' + Date.now() + '.png';
 				console.log(newP)
 				fs.renameSync(oldP, newP);
 				console.log('副本替换成功!')
-						if(j==fileCount-1){
-							mulist.list=mull;
-			                mulist.message="上传成功";
-			               res.send(mulist);
-						}
-              
+				if(j == fileCount - 1) {
+					mulist.list = mull;
+					mulist.message = "上传成功";
+					res.send(mulist);
+				}
+
 			}
-			
-			
+
 		}
 
 	})
@@ -828,7 +941,7 @@ router.post('/faso', function(req, res, next) {
 	var mailOptions = {
 		from: '348695165@qq.com', // 发送者  
 		to: name, // 接受者,可以同时发送多个,以逗号隔开  
-		subject: '记忆网注册码发送', // 标题  
+		subject: '青春记忆注册码发送', // 标题  
 		//text: 'Hello world', // 文本  
 		html: `<h2>验证码为 ` + t + ` </h2> `
 	};
@@ -837,8 +950,44 @@ router.post('/faso', function(req, res, next) {
 		try {
 			yzm = t;
 			myqq = name;
-			console.log('发送成功');
-			res.send(yzm);
+			var sql8 = "SELECT * FROM ?? WHERE ?? = ?";
+			var inserts8 = ['session', 'name', name];
+			sql8 = testm.format(sql8, inserts8);
+			testm.query(sql8, function(err, rows, fields) {
+				try {
+					console.log(rows)
+					if(rows.length == 0) {
+						var EusernC = {
+							name: name,
+							yzm: t
+						}
+						var sql100 = "INSERT INTO ?? SET ?";
+						var inserts100 = ['session', EusernC];
+						sql100 = testm.format(sql100, inserts100);
+						testm.query(sql100, function(err, rows, fields) {
+							try {
+								res.send('发送成功');
+							} catch(e) {
+								//TODO handle the exception
+							}
+						})
+					} else {
+						console.log(rows)
+						var sql6 = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+						var inserts6 = ['session', 'yzm', t, 'name', name];
+						sql6 = testm.format(sql6, inserts6);
+						testm.query(sql6, function(err, rows, fields) {
+							try {
+								res.send('发送成功');
+							} catch(e) {
+								//TODO handle the exception
+							}
+						})
+					}
+				} catch(e) {
+					console.log(e)
+				}
+			});
 		} catch(e) {
 
 			console.log(e);
@@ -852,4 +1001,126 @@ router.post('/faso', function(req, res, next) {
 		//		res.send(yzm);
 	});
 })
+//qq邮箱忘记密码验证
+router.post('/refaso', function(req, res, next) {
+	var name = req.body.email;
+	var t = '';
+	for(var i = 0; i < 6; i++) {
+		t += Math.floor(Math.random() * 10);
+	}
+	//	console.log(t);
+	var transporter = nodemailer.createTransport({
+		service: 'qq',
+		auth: {
+			user: '348695165@qq.com',
+			pass: 'raqzimjkotkcbhcd' //授权码,通过QQ获取  
+		}
+	});
+
+	var mailOptions = {
+		from: '348695165@qq.com', // 发送者  
+		to: name, // 接受者,可以同时发送多个,以逗号隔开  
+		subject: '青春记忆验证码发送', // 标题  
+		//text: 'Hello world', // 文本  
+		html: `<h2>验证码为 ` + t + ` </h2> `
+	};
+
+	transporter.sendMail(mailOptions, function(err, info) {
+		try {
+			yzm1 = t;
+			myqq1 = name;
+			var sql8 = "SELECT * FROM ?? WHERE ?? = ?";
+			var inserts8 = ['session', 'name', name];
+			sql8 = testm.format(sql8, inserts8);
+			testm.query(sql8, function(err, rows, fields) {
+				try {
+					if(rows.length == 0) {
+						var EusernC = {
+							name: name,
+							yzm: t
+						}
+						var sql100 = "INSERT INTO ?? SET ?";
+						var inserts100 = ['session', EusernC];
+						sql100 = testm.format(sql100, inserts100);
+						testm.query(sql100, function(err, rows, fields) {
+							try {
+								console.log(rows)
+								res.send('发送成功');
+							} catch(e) {
+								//TODO handle the exception
+							}
+						})
+					} else {
+						var sql6 = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+						var inserts6 = ['session', 'yzm', t, 'name', name];
+						sql6 = testm.format(sql6, inserts6);
+						testm.query(sql6, function(err, rows, fields) {
+							try {
+								res.send('发送成功');
+							} catch(e) {
+								//TODO handle the exception
+							}
+						})
+					}
+				} catch(e) {
+					console.log(e)
+				}
+			});
+		} catch(e) {
+
+			console.log(e);
+		}
+		//		if(err) {
+		//			console.log(err);
+		//			return;
+		//		}
+		//		yzm = t;
+		//		console.log('发送成功');
+		//		res.send(yzm);
+	});
+})
+//重置密码
+router.post('/chongzhi', function(req, res, next) {
+	var name = req.body.name;
+	var pass = req.body.pass;
+	var myyzm = req.body.yzm;
+	var md5 = crypto.createHash("md5");
+	var newPas = md5.update(pass).digest("hex");
+	console.log(newPas)
+	var sql17 = "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?";
+	var inserts17 = ['session', 'name', name, 'yzm', myyzm];
+	sql17 = testm.format(sql17, inserts17);
+	testm.query(sql17, function(err, rows, fields) {
+		try {
+			if(rows.length == 0) {
+				zmac.message = "验证码不正确"
+				res.send(zmac);
+				return false;
+			} else {
+				zmac1 = {};
+				var sql6 = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+				var inserts6 = ['wo', 'password', newPas, 'name', name];
+				sql6 = testm.format(sql6, inserts6);
+				testm.query(sql6, function(err, rows, fields) {
+					try {
+						if(rows == undefined) {
+							zmac1.message = "此账号还没有注册过"
+							res.send(zmac1);
+						} else {
+							zmac1.message = "修改成功"
+							res.send(zmac1);
+						}
+					} catch(e) {
+
+						console.log(e)
+					}
+
+				});
+			}
+
+		} catch(e) {
+			//TODO handle the exception
+		}
+	})
+});
 module.exports = router;

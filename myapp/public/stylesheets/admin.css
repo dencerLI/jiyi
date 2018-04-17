@@ -3,5 +3,6 @@
 .am-topbar-brand strong{ float: left;}
 #myN{ float: left; margin: 0; padding: 0; margin-left: 10px;}
 a{ cursor: pointer;}
+.admin-content-body{ width: 100%; overflow: auto;}
 #listfile td{ font-size: 12px; height: 32px;white-space: nowrap;}
 #listfile textarea{ height: 23px;}

@@ -10,6 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="baidu_union_verify" content="c716b9fba7a7519a54f2d7f6b8301fb7">
 		<link rel="icon" type="image/png" href="assets/i/favicon.png">
 		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
 		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
@@ -52,9 +53,7 @@
 			</div>
 
 			<button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
-
 			<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-
 				<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
 					<!--<li>
 						<a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a>
@@ -127,6 +126,7 @@
 						<div class="am-panel-bd">
 							<p><span class="am-icon-tag"></span>个性签名</p>
 							<p>欢迎来到记忆的个人中心</p>
+							<p id="lll"></p>
 						</div>
 					</div>
 				</div>
@@ -243,7 +243,7 @@
 						<thead>
 							<tr>
 								<th>标题</th>
-								<th>内容</th>
+								<th>浏览次数</th>
 								<th>分类</th>
 								<th>创建时间</th>
 								<th>操作</th>
@@ -252,7 +252,7 @@
 						<tbody id="listfile">
 							<tr v-for="n in message.length">
 								<td width="15%">{{message[n-1].bt}}</td>
-								<td width="45%"><textarea readonly style="width: 100%;border: none; resize:none;">{{guo(message[n-1].file)}}</textarea></td>
+								<td width="45%">{{message[n-1].tj}}</td>
 								<td width="15%" v-if="message[n-1].lei=='3'">原创●新闻</td>
 								<td width="15%" v-else-if="message[n-1].lei=='2'">生活百科</td>
 								<td width="15%" v-else-if="message[n-1].lei=='1'">技术文章</td>
@@ -266,8 +266,9 @@
 
 				</div>
 				<footer class="admin-content-footer">
-					<hr>
-					<p class="am-padding-left">© 2014 www.mefat.club developer likun.</p>
+			<p style="text-align: center;">© 2018
+				<a>www.mefat.club</a> developer
+				<a></a> likun <a href='http://www.miibeian.gov.cn' target='_blank'>京ICP备18017945号-1</a></p>
 				</footer>
 
 			</div>

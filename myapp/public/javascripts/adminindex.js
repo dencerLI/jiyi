@@ -22,7 +22,9 @@ $(function() {
 				$("#myimg1").attr("src", data.images);
 				$.cookie("myurl", data.images);
 				$("#user-email").val(data.name);
-
+				if(data.all!=null&&data.all!=""&&data.all!=undefined){
+					$("#lll").text("总浏览量 ："+data.all);
+				}
 				$("#user-QQ").val(data.name.split("@")[0]);
 				$("#user-name").val(data.username);
 				$("#user-intro").val(data.file);
@@ -139,7 +141,6 @@ $(function() {
 				// `this` 在方法里指向当前 Vue 实例
 				// `event` 是原生 DOM 事件
 				var self = event.currentTarget;
-				console.log(self.parentNode.parentNode)
 				var isid = event.currentTarget.id;
 				var dataG={"isid":isid}
 				axios({
@@ -148,7 +149,6 @@ $(function() {
 					data: dataG
 				}).then(function(response) {
 					var metdata = response.data;
-					console.log(metdata)
 					if(metdata=="删除成功"){
 					   self.parentNode.parentNode.remove();
 					}

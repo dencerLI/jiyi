@@ -9,6 +9,7 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="baidu_union_verify" content="c716b9fba7a7519a54f2d7f6b8301fb7">
 		<link rel="alternate icon" type="image/png" href="images/meinv.jpg">
 		<link rel="stylesheet" href="stylesheets/assets/css/amazeui.min.css" />
 		<link rel="stylesheet" href="stylesheets/login.css" />
@@ -76,12 +77,56 @@
 				</div>
 
 				<hr>
-				<p>© 2014 www.mefat.club developer .</p>
 			</div>
 		</div>
+		<div class="taost">
+			<span class="am-icon-close Eclose"></span>
+		<div class="am-g am-container Eject">
+			<div class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin: 10px 0px 10px 0px;">
+				<div class="retitle">重置密码</div>
+			</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
+						<div class="am-input-group">
+							<input type="text" class="am-form-field" placeholder="请输入你的邮箱" id="name1">
+							<span class="am-input-group-btn">
+                              <button class="am-btn am-btn-default" type="button" id="faso">发送验证码到邮箱</button>
+                           </span>
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-envira"></i></span>
+							<input type="text" class="am-form-field" placeholder="请输入验证码" id="yzm">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+							<input type="password" class="am-form-field" placeholder="请输入新密码" id="repass">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<div class="am-input-group">
+							<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+							<input type="password" class="am-form-field" placeholder="请再次输入新密码" id="repass1">
+						</div>
+					</div>
+					<div class="am-u-lg-12 am-u-md-12 am-u-sm-12 mir-top10">
+						<button type="button" class="am-btn am-btn-primary am-btn-block" id="login1">确定</button>
+					</div>
+		    </div>
+		</div>
+		
 		<script type="text/javascript">
+			$(".Eclose").click(function(){
+				$(".taost").hide();
+				$('#name1').val("");
+				$("#yzm").val("");
+				$("#repass").val("");
+				$("#repass1").val("");
+			})
 			$("#wj").click(function(){
-				alert("暂未开放此功能！请联系管理员更改QQ348695165")
+				$(".taost").show();
 			})
 			$('#login').click(function() {
 				var isname=$("#name").val();
@@ -120,6 +165,86 @@
 					}
 				});
 			});
+			var gbq=0;
+			$("#faso").click(function(){
+				if(gbq==0){
+				var isname = $("#name1").val();
+//				var mm=/^\d+@qq\.com$/
+                var mm=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+				if(!mm.test(isname)) {
+					alert("账号必须是邮箱");return false;
+				}
+				var data = {
+					"email": isname
+				}
+				$.ajax({
+					url: '/users/refaso',
+					type: 'post',
+					data: data,
+					success: function(data) {
+						$("#faso").text("发送成功！(30)秒后可再次发送");
+						gbq=1;
+						var tm=29;
+						var gh=setInterval(function(){
+							$("#faso").text("发送成功！("+tm+")秒后可再次发送");
+							if(tm==0){
+								$("#faso").text("发送验证码到邮箱");
+								gbq=0;
+								clearInterval(gh);
+							}
+							tm--;
+						},1000)
+						//console.log()
+//						$(".yzm").text(data)
+//						if(data.length==0) {
+//							alert("你输入的邮箱不正确")
+//							return false;
+//						}
+					},
+					error: function(data) {
+
+					}
+				});
+				}
+			})
+			$("#login1").click(function(){
+				var name=$('#name1').val();
+				var yzm=$("#yzm").val();
+				var repass=$("#repass").val();
+				var repass1=$("#repass1").val();
+				 var mm=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+				if(!mm.test(name)) {
+					alert("账号必须是邮箱");return false;
+				}
+				if(name==""||name==null||name==undefined) {
+					alert("账号不能为空");return false;
+				}
+				if(yzm==""||yzm==null||yzm==undefined) {
+					alert("验证码不能为空");return false;
+				}if(repass==""||repass==null||repass==undefined) {
+					alert("密码不能为空");return false;
+				}
+				
+				if(repass!=repass1) {
+					alert("两次密码不一致");return false;
+				}
+				var data={"name":name,"yzm":yzm,"pass":repass}
+				$.ajax({
+					url: '/users/chongzhi',
+					type: 'post',
+					data: data,
+					success: function(data) {
+						alert(data.message);
+						if(data.message=="修改成功"){
+							location.href = 'login';
+						}
+					},
+					error: function(data) {
+
+					}
+				});
+				
+			})
 		</script>
 	</body>
 

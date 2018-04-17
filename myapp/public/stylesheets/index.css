@@ -151,7 +151,8 @@ word-break: break-all;}
 .highLight{background: #0e90d2;color: #fff;}
 .darkLight{color: grey;cursor: default;}
 #cgm li{ cursor: pointer;}
-
+.menulist a{ color: #fff !important;}
+.menulist a:hover{ color: #009E94 !important;}
 
 @media only screen and (max-width: 1200px) {
 	.shit{width:28.9rem; height:18.845rem}

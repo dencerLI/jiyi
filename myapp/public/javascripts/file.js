@@ -100,11 +100,14 @@ $(function(){
 							data: data,
 							success: function(data) {
 								$("#deng").hide();
-								alert(data)
 								if(data == "发表成功") {
-									location.href = "file"
+									alert(data)
+									location.href = "/"
+								}else if(data == "请重新登陆"){
+									alert(data)
+									location.href = "login"
 								} else {
-
+                                    alert(data)
 								}
 							},
 							error: function(data) {
@@ -142,13 +145,15 @@ $(function(){
 						data: data,
 						success: function(data) {
 							$("#deng").hide();
-							alert(data)
 							if(data == "发表成功") {
-								location.href = "file"
-							} else {
-
-								//								
-							}
+									alert(data)
+									location.href = "/"
+								}else if(data == "请重新登陆"){
+									alert(data)
+									location.href = "login"
+								} else {
+                                    alert(data)
+								}
 						},
 						error: function(data) {
 							$("#deng").hide();
